@@ -1,0 +1,1940 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HÓA HỌC - BÀI 8 &amp; BÀI 9: SULFURIC ACID, MUỐI SULFATE VÀ ÔN TẬP CHƯƠNG 2 (90 CÂU)</title>
+    <script>
+        window.MathJax = {
+            startup: { typeset: false },
+            tex: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+        };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
+        body { font-family: 'Montserrat', sans-serif; }
+        .pulse-glow { animation: pulseGlow 2s infinite; }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(59, 130, 246, 0.5); }
+            50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.8); }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900 min-h-screen text-white flex flex-col items-center justify-between p-4 md:p-8">
+
+    <!-- Header -->
+    <header class="w-full max-w-4xl text-center my-4">
+        <div class="inline-block bg-blue-600 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-2 shadow-lg">
+            Trò Chơi Học Tập - Hóa học 12
+        </div>
+        <h1 class="text-xl md:text-3xl font-extrabold bg-gradient-to-r from-teal-200 via-blue-200 to-purple-200 bg-clip-text text-transparent">
+            BÀI 8: SULFURIC ACID VÀ MUỐI SULFATE – BÀI 9: ÔN TẬP CHƯƠNG 2 (90 CÂU)
+        </h1>
+        <p class="text-slate-300 text-sm md:text-base mt-1">Chương 2: Nitrogen – Sulfur</p>
+    </header>
+
+    <!-- Main Container -->
+    <main class="w-full max-w-4xl bg-slate-800/80 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-700 p-6 md:p-8 my-auto relative overflow-hidden">
+
+        <!-- SETUP SCREEN -->
+        <div id="setup-screen" class="space-y-6">
+            <div class="text-center">
+                <h2 class="text-2xl font-bold text-teal-400 mb-2">Chọn Chế Độ Chơi</h2>
+                <p class="text-slate-300 text-sm">Bộ đề 90 câu chuẩn ma trận định dạng mới: Không giới hạn thời gian, có âm thanh phản hồi!</p>
+            </div>
+
+            <!-- Mode Selector Buttons -->
+            <div class="flex justify-center space-x-4">
+                <button id="btn-mode-group" onclick="setGameMode('group')" class="px-6 py-2.5 rounded-xl font-bold text-sm bg-blue-600 text-white shadow-lg transition flex items-center space-x-2">
+                    <i class="fa-solid fa-users"></i> <span>Đấu Đội / Nhiều Người</span>
+                </button>
+                <button id="btn-mode-single" onclick="setGameMode('single')" class="px-6 py-2.5 rounded-xl font-bold text-sm bg-slate-700 text-slate-300 shadow-lg transition flex items-center space-x-2">
+                    <i class="fa-solid fa-user-graduate"></i> <span>Kiểm Tra Cá Nhân (Đấu đơn)</span>
+                </button>
+            </div>
+
+            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700 space-y-4 max-w-md mx-auto">
+                <h3 id="setup-subtitle" class="text-center font-semibold text-teal-300 text-sm">Thiết lập thông tin các đội chơi</h3>
+                <div id="participant-inputs" class="space-y-3">
+                    <div class="flex items-center space-x-2">
+                        <span class="bg-blue-600 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shrink-0">1</span>
+                        <input type="text" value="Đội 1" class="participant-input w-full bg-slate-900 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500 font-semibold text-sm" placeholder="Nhập tên...">
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="bg-purple-600 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shrink-0">2</span>
+                        <input type="text" value="Đội 2" class="participant-input w-full bg-slate-900 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-purple-500 font-semibold text-sm" placeholder="Nhập tên...">
+                    </div>
+                </div>
+
+                <div id="add-team-box" class="flex justify-center pt-2">
+                    <button onclick="addParticipantInput()" class="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg font-semibold text-xs transition flex items-center space-x-1">
+                        <i class="fa-solid fa-plus"></i> <span id="add-btn-text">Thêm đội</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-center pt-2">
+                <button onclick="startGame()" class="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold text-lg px-8 py-3 rounded-xl shadow-lg transform transition hover:scale-105">
+                    Bắt Đầu Ngay (90 Câu)!
+                </button>
+            </div>
+        </div>
+
+        <!-- GAMEPLAY SCREEN -->
+        <div id="game-screen" class="hidden space-y-6">
+            <div class="flex flex-wrap justify-between items-center bg-slate-900/60 p-4 rounded-xl border border-slate-700">
+                <div class="flex items-center space-x-3 mb-2 sm:mb-0">
+                    <span id="turn-label" class="text-xs uppercase tracking-wider text-slate-400">Thí sinh:</span>
+                    <span id="current-participant-badge" class="bg-blue-600 text-white font-bold px-3 py-1 rounded-full text-sm shadow">Bạn</span>
+                </div>
+                <div class="text-sm font-semibold text-teal-300">
+                    Câu hỏi <span id="current-q-num">1</span> / <span id="total-q-num">90</span>
+                </div>
+                <div class="flex items-center space-x-2 text-slate-400 font-medium text-xs sm:text-sm">
+                    <i class="fa-regular fa-clock text-teal-400"></i>
+                    <span>Tự do làm bài</span>
+                </div>
+            </div>
+
+            <div id="scoreboard-mini" class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center"></div>
+
+            <div class="bg-slate-900/80 p-6 rounded-2xl border border-slate-700 shadow-inner">
+                <div id="question-badge" class="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-teal-800 text-teal-200 mb-2"></div>
+                <h3 id="question-text" class="text-lg md:text-xl font-bold text-white leading-relaxed"></h3>
+            </div>
+
+            <div id="options-container" class="space-y-4"></div>
+        </div>
+
+        <!-- FEEDBACK SCREEN -->
+        <div id="feedback-screen" class="hidden space-y-6 text-center py-4">
+            <div id="feedback-icon" class="text-6xl mb-2"></div>
+            <h3 id="feedback-title" class="text-2xl font-bold"></h3>
+            <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 text-left max-w-2xl mx-auto">
+                <p class="text-xs font-bold text-slate-400 uppercase mb-1">Hướng dẫn giải thích đáp án:</p>
+                <p id="feedback-rationale" class="text-slate-200 text-sm md:text-base"></p>
+            </div>
+            <div>
+                <button onclick="nextQuestion()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-3 rounded-xl shadow-lg transition transform hover:scale-105">
+                    Tiếp Tục <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- END GAME SCREEN -->
+        <div id="end-screen" class="hidden space-y-6 text-center py-6">
+            <div class="text-6xl text-yellow-400 mb-2">
+                <i class="fa-solid fa-trophy animate-bounce"></i>
+            </div>
+            <h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-500">
+                KẾT QUẢ BÀI THI TỔNG HỢP
+            </h2>
+            <p id="end-subtitle" class="text-slate-300">Đã hoàn thành toàn bộ 90 câu hỏi!</p>
+
+            <div id="final-scoreboard" class="max-w-md mx-auto space-y-3"></div>
+
+            <div class="pt-4">
+                <button onclick="restartGame()" class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold px-8 py-3 rounded-xl shadow-lg transition transform hover:scale-105">
+                    Làm Lại Từ Đầu
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="w-full max-w-4xl text-center text-xs text-slate-400 my-2">
+        Trò chơi học tập Hóa học – Chương 2: Nitrogen và Sulfur
+    </footer>
+
+    <script>
+        // Đợi MathJax tải xong rồi mới xử lý công thức trong nội dung vừa được chèn.
+        function typesetMath(element) {
+            if (!element) return;
+            const mj = window.MathJax;
+            if (!mj) {
+                console.warn("MathJax chưa sẵn sàng.");
+                return;
+            }
+            const ready = mj.startup && mj.startup.promise
+                ? mj.startup.promise
+                : Promise.resolve();
+            ready.then(() => {
+                if (window.MathJax.typesetPromise) {
+                    window.MathJax.typesetClear([element]);
+                    return window.MathJax.typesetPromise([element]);
+                }
+            }).catch(err => console.error("Lỗi hiển thị công thức:", err));
+        }
+
+        // Web Audio API phát âm thanh sinh động khi tương tác
+        let audioCtx = null;
+        function getAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        function playCorrectSound() {
+            try {
+                const ctx = getAudioContext();
+                const now = ctx.currentTime;
+                const notes = [523.25, 659.25, 783.99]; // Âm vang tươi vui (C5 -> E5 -> G5)
+                notes.forEach((freq, index) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(freq, now + index * 0.1);
+                    gain.gain.setValueAtTime(0.18, now + index * 0.1);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + index * 0.1 + 0.28);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(now + index * 0.1);
+                    osc.stop(now + index * 0.1 + 0.28);
+                });
+            } catch (e) {
+                console.log("Audio error", e);
+            }
+        }
+
+        function playIncorrectSound() {
+            try {
+                const ctx = getAudioContext();
+                const now = ctx.currentTime;
+                const freqs = [174.61, 138.59]; // Âm báo sai trầm (F3 -> C#3)
+                freqs.forEach((freq, index) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(freq, now + index * 0.15);
+                    gain.gain.setValueAtTime(0.2, now + index * 0.15);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + index * 0.15 + 0.25);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(now + index * 0.15);
+                    osc.stop(now + index * 0.15 + 0.25);
+                });
+            } catch (e) {
+                console.log("Audio error", e);
+            }
+        }
+
+        // Ngân hàng 90 câu hỏi được biên soạn theo phiếu bài tập Bài 8 và Bài 9 trong PDF.
+        const originalQuestions = [
+        {
+                "type": "mcq",
+                "level": "NB",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Câu 1 [Bài 8 - NB]. Công thức hoá học của sulfuric acid là:",
+                "options": [
+                        {
+                                "text": "A. $H_2SO_3$",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. $H_2SO_4$",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "C. $H_2S$",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. $H_2S_2O_7$",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "Sulfuric acid có công thức hóa học là $H_2SO_4$."
+        },
+        {
+                "type": "mcq",
+                "level": "NB",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Câu 2 [Bài 8 - NB]. Ở điều kiện thường, dung dịch sulfuric acid đặc có đặc điểm nào?",
+                "options": [
+                        {
+                                "text": "A. Dễ bay hơi, màu vàng nhạt",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. Sánh như dầu, không màu, không bay hơi",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "C. Nhẹ hơn nước, màu xanh lam",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. Có mùi khai nồng",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "$H_2SO_4$ đặc là chất lỏng sánh như dầu, không màu và không bay hơi."
+        },
+        {
+                "type": "mcq",
+                "level": "NB",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Câu 3 [Bài 8 - NB]. Quy tắc an toàn bắt buộc khi pha loãng $H_2SO_4$ đặc là:",
+                "options": [
+                        {
+                                "text": "A. Rót nhanh nước vào acid đặc",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. Rót từ từ acid đặc vào nước và khuấy đều",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "C. Rót từ từ nước vào acid đặc",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. Đổ cùng lúc nước và acid vào bình",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "Luôn rót từ từ acid đặc vào nước, không làm ngược lại."
+        },
+        {
+                "type": "mcq",
+                "level": "NB",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Câu 4 [Bài 8 - NB]. Thuốc thử thông dụng để nhận biết ion sulfate ($SO_4^{2-}$) là:",
+                "options": [
+                        {
+                                "text": "A. Dung dịch $AgNO_3$",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. Dung dịch $NaOH$",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "C. Dung dịch chứa ion Ba2+",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "D. Dung dịch HCl",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "Ion Ba2+ tạo kết tủa trắng $BaSO_4$ với ion sulfate."
+        },
+        {
+                "type": "mcq",
+                "level": "NB",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Câu 5 [Bài 8 - NB]. Nhỏ $BaCl_2$ vào dung dịch $Na_2SO_4$ quan sát được hiện tượng nào?",
+                "options": [
+                        {
+                                "text": "A. Kết tủa vàng",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. Kết tủa trắng",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "C. Có khí thoát ra",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. Dung dịch chuyển xanh",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "Phản ứng tạo kết tủa trắng $BaSO_4$."
+        },
+        {
+                "type": "mcq",
+                "level": "NB",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Câu 6 [Bài 8 - NB]. Trong công nghiệp, sulfuric acid chủ yếu được sản xuất bằng:",
+                "options": [
+                        {
+                                "text": "A. Phương pháp Ostwald",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. Phương pháp tiếp xúc",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "C. Phương pháp Haber-Bosch",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. Phương pháp điện phân",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "Sulfuric acid được sản xuất chủ yếu bằng phương pháp tiếp xúc."
+        },
+        {
+                "type": "mcq",
+                "level": "NB",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Câu 7 [Bài 8 - NB]. Muối sulfate nào được ứng dụng làm thạch cao bó bột trong y học?",
+                "options": [
+                        {
+                                "text": "A. $MgSO_4\\cdot 7H_2O$",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. $BaSO_4$",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "C. $CaSO_4\\cdot 2H_2O$",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "D. $(NH_4)_2SO_4$",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "Thạch cao dùng trong y học là calcium sulfate dihydrate, $CaSO_4\\cdot 2H_2O$."
+        },
+        {
+                "type": "mcq",
+                "level": "NB",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Câu 8 [Bài 8 - NB]. Tính chất nào của $H_2SO_4$ đặc gây hiện tượng hóa đen đường mía?",
+                "options": [
+                        {
+                                "text": "A. Tính acid yếu",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. Tính oxi hóa yếu",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "C. Tính háo nước",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "D. Tính dễ bay hơi",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "$H_2SO_4$ đặc có tính háo nước, tách nước khỏi carbohydrate làm hóa đen."
+        },
+        {
+                "type": "mcq",
+                "level": "TH",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Câu 9 [Bài 8 - TH]. Đun nóng Cu với $H_2SO_4$ đặc, hiện tượng nào xảy ra?",
+                "options": [
+                        {
+                                "text": "A. Cu tan, dung dịch xanh và có khí $SO_2$ mùi hắc",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "B. Có khí $H_2$ không màu thoát ra",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "C. Không có hiện tượng",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. Có kết tủa đỏ bám trên Cu",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "Cu bị oxi hóa thành Cu2+, tạo $CuSO_4$ màu xanh và $SO_2$."
+        },
+        {
+                "type": "mcq",
+                "level": "TH",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Câu 10 [Bài 8 - TH]. Khối carbon đen khi cho $H_2SO_4$ đặc vào đường mía dâng cao do khí nào sinh ra?",
+                "options": [
+                        {
+                                "text": "A. $H_2$ và $O_2$",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. $CO_2$ và $SO_2$",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "C. $CO$ và $N_2$",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. $CH_4$ và $H_2S$",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "Quá trình than hóa và phản ứng tiếp theo tạo khí $CO_2$, $SO_2$ làm khối carbon dâng lên."
+        },
+        {
+                "type": "mcq",
+                "level": "TH",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Câu 11 [Bài 8 - TH]. Phản ứng nào minh họa tính acid khó bay hơi của $H_2SO_4$ đặc?",
+                "options": [
+                        {
+                                "text": "A. Cu + 2$H_2SO_4$ → $CuSO_4$ + $SO_2$ + 2$H_2O$",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. $CaF_2$ + $H_2SO_4$ → $CaSO_4$ + 2HF",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "C. C + 2$H_2SO_4$ → $CO_2$ + 2$SO_2$ + 2$H_2O$",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. 2FeO + 4$H_2SO_4$ → Fe2(SO4)3 + $SO_2$ + 4$H_2O$",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "$H_2SO_4$ đặc, nóng đẩy acid dễ bay hơi HF ra khỏi muối $CaF_2$."
+        },
+        {
+                "type": "mcq",
+                "level": "TH",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Câu 12 [Bài 8 - TH]. Theo phiếu bài tập, dung dịch loãng nào được nêu để ngâm rửa trung hòa acid còn bám trên da khi sơ cứu bỏng sulfuric acid?",
+                "options": [
+                        {
+                                "text": "A. $NaOH$ 10%",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. $NaHCO_3$ 2%",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "C. HCl 5%",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. CH3$CO$OH 1%",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "Đáp án theo nội dung phiếu bài tập: dung dịch $NaHCO_3$ 2%. Khi xảy ra bỏng hóa chất, cần ưu tiên xả rửa ngay bằng nhiều nước sạch và tìm trợ giúp y tế."
+        },
+        {
+                "type": "mcq",
+                "level": "TH",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Câu 13 [Bài 8 - TH]. Giai đoạn oxi hóa $SO_2$ thành $SO_3$ trong sản xuất $H_2SO_4$ thực hiện khoảng $450^\\circ C$ với xúc tác nào?",
+                "options": [
+                        {
+                                "text": "A. Fe",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. Pt",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "C. $V_2O_5$",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "D. Ni",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "Chất xúc tác được nêu là vanadium(V) oxide, $V_2O_5$."
+        },
+        {
+                "type": "mcq",
+                "level": "TH",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Câu 14 [Bài 8 - TH]. $BaSO_4$ được dùng làm chất cản quang khi chụp X-quang đường tiêu hóa chủ yếu vì:",
+                "options": [
+                        {
+                                "text": "A. Dễ tan trong nước",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. Rất độc nên diệt vi khuẩn",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "C. Không tan trong nước và acid, hấp thụ tốt tia X",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "D. Phát sáng trong tối",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "$BaSO_4$ không tan trong nước và acid, đồng thời hấp thụ tia X."
+        },
+        {
+                "type": "mcq",
+                "level": "VD",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Câu 15 [Bài 8 - VD]. Trong dãy $Fe_2O_3$, Cu, $BaCl_2$, $NaOH$, Ca$CO$3 có bao nhiêu chất tác dụng với $H_2SO_4$ loãng?",
+                "options": [
+                        {
+                                "text": "A. 3",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. 4",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "C. 5",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. 2",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "Các chất phản ứng: $Fe_2O_3$, $BaCl_2$, $NaOH$, Ca$CO$3. Cu không phản ứng với $H_2SO_4$ loãng; có 4 chất."
+        },
+        {
+                "type": "mcq",
+                "level": "VD",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Câu 16 [Bài 8 - VD]. Hòa tan 0,1 mol Cu trong $H_2SO_4$ đặc, nóng dư. Thể tích $SO_2$ ở 25°C, 1 bar là:",
+                "options": [
+                        {
+                                "text": "A. 2,479 L",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "B. 4,958 L",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "C. 1,2395 L",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. 3,7185 L",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "Cu + 2$H_2SO_4$ → $CuSO_4$ + $SO_2$ + 2$H_2O$. n$SO_2$ = nCu = 0,1 mol; V = 0,1 × 24,79 = 2,479 L."
+        },
+        {
+                "type": "mcq",
+                "level": "VD",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Câu 17 [Bài 8 - VD]. Để phân biệt NaCl, $Na_2SO_4$ và HCl chỉ cần dùng một thuốc thử duy nhất nào?",
+                "options": [
+                        {
+                                "text": "A. Quỳ tím",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. $BaCl_2$",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "C. $AgNO_3$",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. Quỳ tím và $BaCl_2$",
+                                "isCorrect": true
+                        }
+                ],
+                "rationale": "Dùng quỳ tím nhận biết HCl; dùng $BaCl_2$ phân biệt $Na_2SO_4$ (kết tủa trắng) với NaCl."
+        },
+        {
+                "type": "mcq",
+                "level": "VD",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Câu 18 [Bài 8 - VD]. Than hóa hoàn toàn 10 g sucrose (C12$H_2$2O11). Khối lượng carbon tạo thành là:",
+                "options": [
+                        {
+                                "text": "A. 4,21 g",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "B. 5,26 g",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "C. 3,60 g",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. 4,80 g",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "C12$H_2$2O11 → 12C + 11$H_2O$. M = 342; mC = 10 × 144/342 ≈ 4,21 g."
+        },
+        {
+                "type": "mcq",
+                "level": "VDC",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Câu 19 [Bài 8 - VDC]. Hỗn hợp Fe và Cu có 2,479 L $H_2$ khi tác dụng $H_2SO_4$ loãng và 4,958 L $SO_2$ khi tác dụng $H_2SO_4$ đặc nóng (đkc). Khối lượng hỗn hợp là:",
+                "options": [
+                        {
+                                "text": "A. 8,8 g",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "B. 12,0 g",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "C. 15,6 g",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. 11,2 g",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "n$H_2$ = 0,1 mol nên nFe = 0,1 mol, mFe = 5,6 g. n$SO_2$ = 0,2 mol. Bảo toàn electron: 3nFe + 2nCu = 2n$SO_2$ ⇒ nCu = 0,05 mol, mCu = 3,2 g. Tổng m = 8,8 g."
+        },
+        {
+                "type": "mcq",
+                "level": "VDC",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Câu 20 [Bài 8 - VDC]. Hấp thụ 2,479 L $SO_3$ (đkc) vào 9,8 g $H_2SO_4$ 100% thu oleum $H_2SO_4$·n$SO_3$. Giá trị n là:",
+                "options": [
+                        {
+                                "text": "A. 1",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "B. 2",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "C. 3",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. 0,5",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "n$SO_3$ = 2,479/24,79 = 0,1 mol; n$H_2SO_4$ = 9,8/98 = 0,1 mol. Tỉ lệ 1:1 nên n = 1."
+        },
+        {
+                "type": "tf",
+                "level": "NB",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Xét cấu tạo và tính chất vật lí của sulfuric acid. — ý a) Phân tử $H_2SO_4$ có công thức cấu tạo HO–S(=O)2–OH.",
+                "correctBool": true,
+                "rationale": "Đúng: công thức cấu tạo được nêu là HO–S(=O)2–OH."
+        },
+        {
+                "type": "tf",
+                "level": "NB",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Xét cấu tạo và tính chất vật lí của sulfuric acid. — ý b) Dung dịch $H_2SO_4$ đặc là chất lỏng sánh như dầu, màu xanh nhạt và dễ bay hơi.",
+                "correctBool": false,
+                "rationale": "Sai: $H_2SO_4$ đặc là chất lỏng không màu, không bay hơi."
+        },
+        {
+                "type": "tf",
+                "level": "NB",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Xét cấu tạo và tính chất vật lí của sulfuric acid. — ý c) Sulfuric acid tan vô hạn trong nước và quá trình hòa tan tỏa ra lượng nhiệt rất lớn.",
+                "correctBool": true,
+                "rationale": "Đúng: quá trình hòa tan tỏa nhiều nhiệt."
+        },
+        {
+                "type": "tf",
+                "level": "NB",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Xét cấu tạo và tính chất vật lí của sulfuric acid. — ý d) Giữa các phân tử $H_2SO_4$ có liên kết hydrogen liên phân tử.",
+                "correctBool": true,
+                "rationale": "Đúng: giữa các phân tử có liên kết hydrogen liên phân tử."
+        },
+        {
+                "type": "tf",
+                "level": "NB",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Xét quy tắc an toàn và sơ cứu khi làm việc với $H_2SO_4$ đặc. — ý a) Khi pha loãng, rót từ từ acid đặc vào nước và khuấy nhẹ bằng đũa thủy tinh.",
+                "correctBool": true,
+                "rationale": "Đúng: luôn rót acid vào nước từ từ."
+        },
+        {
+                "type": "tf",
+                "level": "NB",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Xét quy tắc an toàn và sơ cứu khi làm việc với $H_2SO_4$ đặc. — ý b) Có thể đổ nhanh nhiều nước vào acid đặc để hạ nhiệt tức thì.",
+                "correctBool": false,
+                "rationale": "Sai: tuyệt đối không đổ nước vào acid đặc."
+        },
+        {
+                "type": "tf",
+                "level": "NB",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Xét quy tắc an toàn và sơ cứu khi làm việc với $H_2SO_4$ đặc. — ý c) Khi bị bỏng acid, bước đầu tiên là rửa ngay với nhiều nước sạch lạnh.",
+                "correctBool": true,
+                "rationale": "Đúng theo phiếu: rửa ngay bằng nhiều nước sạch."
+        },
+        {
+                "type": "tf",
+                "level": "NB",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Xét quy tắc an toàn và sơ cứu khi làm việc với $H_2SO_4$ đặc. — ý d) Có thể ngâm rửa vết bỏng acid bằng dung dịch $NaHCO_3$ loãng để trung hòa acid.",
+                "correctBool": true,
+                "rationale": "Đúng theo đáp án của phiếu bài tập."
+        },
+        {
+                "type": "tf",
+                "level": "TH",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Xét tính chất hóa học của sulfuric acid. — ý a) Dung dịch $H_2SO_4$ loãng tác dụng với Cu giải phóng khí $H_2$.",
+                "correctBool": false,
+                "rationale": "Sai: Cu không tác dụng với $H_2SO_4$ loãng."
+        },
+        {
+                "type": "tf",
+                "level": "TH",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Xét tính chất hóa học của sulfuric acid. — ý b) $H_2SO_4$ đặc nóng oxi hóa Cu tạo $CuSO_4$ và $SO_2$.",
+                "correctBool": true,
+                "rationale": "Đúng: Cu tạo $CuSO_4$ và $SO_2$."
+        },
+        {
+                "type": "tf",
+                "level": "TH",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Xét tính chất hóa học của sulfuric acid. — ý c) $H_2SO_4$ đặc có tính háo nước, làm than hóa carbohydrate.",
+                "correctBool": true,
+                "rationale": "Đúng: acid đặc có tính háo nước."
+        },
+        {
+                "type": "tf",
+                "level": "TH",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Xét tính chất hóa học của sulfuric acid. — ý d) Phản ứng $H_2SO_4$ đặc với $CaF_2$ thể hiện tính acid khó bay hơi.",
+                "correctBool": true,
+                "rationale": "Đúng: $H_2SO_4$ đẩy HF ra khỏi muối fluoride."
+        },
+        {
+                "type": "tf",
+                "level": "VD",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Xét ứng dụng muối sulfate và nhận biết ion sulfate. — ý a) $CaSO_4\\cdot 2H_2O$ được dùng làm thạch cao bó bột trong y học.",
+                "correctBool": true,
+                "rationale": "Đúng: calcium sulfate dihydrate là thạch cao bó bột."
+        },
+        {
+                "type": "tf",
+                "level": "VD",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Xét ứng dụng muối sulfate và nhận biết ion sulfate. — ý b) Có thể dùng ion Ba2+ để nhận biết ion $SO_4^{2-}$ trong dung dịch.",
+                "correctBool": true,
+                "rationale": "Đúng: Ba2+ tạo kết tủa $BaSO_4$."
+        },
+        {
+                "type": "tf",
+                "level": "VD",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Xét ứng dụng muối sulfate và nhận biết ion sulfate. — ý c) Kết tủa $BaSO_4$ màu trắng và tan tốt trong HCl loãng.",
+                "correctBool": false,
+                "rationale": "Sai: $BaSO_4$ không tan trong acid loãng."
+        },
+        {
+                "type": "tf",
+                "level": "VD",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Xét ứng dụng muối sulfate và nhận biết ion sulfate. — ý d) $BaSO_4$ được dùng làm chất cản quang khi chụp X-quang đường tiêu hóa.",
+                "correctBool": true,
+                "rationale": "Đúng: $BaSO_4$ hấp thụ tia X."
+        },
+        {
+                "type": "tf",
+                "level": "VDC",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Xét quy trình sản xuất sulfuric acid bằng phương pháp tiếp xúc. — ý a) Nguyên liệu chính ban đầu là quặng bauxite chứa $Al_2O_3$.",
+                "correctBool": false,
+                "rationale": "Sai: nguyên liệu là sulfur hoặc quặng pyrite $FeS_2$."
+        },
+        {
+                "type": "tf",
+                "level": "VDC",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Xét quy trình sản xuất sulfuric acid bằng phương pháp tiếp xúc. — ý b) Oxi hóa $SO_2$ thành $SO_3$ dùng xúc tác $V_2O_5$ ở khoảng $450^\\circ C$.",
+                "correctBool": true,
+                "rationale": "Đúng: dùng $V_2O_5$ khoảng $450^\\circ C$."
+        },
+        {
+                "type": "tf",
+                "level": "VDC",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Xét quy trình sản xuất sulfuric acid bằng phương pháp tiếp xúc. — ý c) Khí $SO_3$ được hấp thụ bằng nước nguyên chất để trực tiếp thu $H_2SO_4$ đặc.",
+                "correctBool": false,
+                "rationale": "Sai: $SO_3$ được hấp thụ bằng $H_2SO_4$ đặc."
+        },
+        {
+                "type": "tf",
+                "level": "VDC",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Xét quy trình sản xuất sulfuric acid bằng phương pháp tiếp xúc. — ý d) Hấp thụ $SO_3$ bằng $H_2SO_4$ đặc thu được oleum $H_2SO_4$·n$SO_3$.",
+                "correctBool": true,
+                "rationale": "Đúng: sản phẩm là oleum $H_2SO_4$·n$SO_3$."
+        },
+        {
+                "type": "sa",
+                "level": "NB",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Câu 1 [Bài 8 - NB]. Cho biết công thức hóa học của thạch cao chứa calcium sulfate dùng trong y học.",
+                "correctAnswer": "CaSO4·2H2O|CaSO4",
+                "rationale": "Thạch cao bó bột là $CaSO_4\\cdot 2H_2O$; phiếu cũng chấp nhận $CaSO_4$."
+        },
+        {
+                "type": "sa",
+                "level": "NB",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Câu 2 [Bài 8 - NB]. Nêu màu sắc kết tủa thu được khi nhỏ $BaCl_2$ vào dung dịch $Na_2SO_4$.",
+                "correctAnswer": "trắng|kết tủa trắng",
+                "rationale": "Kết tủa $BaSO_4$ có màu trắng."
+        },
+        {
+                "type": "sa",
+                "level": "TH",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Câu 3 [Bài 8 - TH]. Trong phản ứng Cu + 2$H_2SO_4$ → $CuSO_4$ + $SO_2$ + 2$H_2O$, số oxi hóa của sulfur thay đổi từ +6 xuống bao nhiêu?",
+                "correctAnswer": "+4",
+                "rationale": "Trong $SO_2$, oxygen có số oxi hóa −2 nên sulfur có số oxi hóa +4."
+        },
+        {
+                "type": "sa",
+                "level": "VD",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Câu 4 [Bài 8 - VD]. Tính thể tích $SO_2$ (L, ở 25°C và 1 bar) thu được khi hòa tan hoàn toàn 6,4 g Cu trong $H_2SO_4$ đặc nóng dư.",
+                "correctAnswer": "2.479",
+                "rationale": "nCu = 6,4/64 = 0,1 mol; theo phương trình n$SO_2$ = 0,1 mol; V = 0,1 × 24,79 = 2,479 L."
+        },
+        {
+                "type": "sa",
+                "level": "VDC",
+                "lesson": "Bài 8: Sulfuric acid và muối sulfate",
+                "question": "Câu 5 [Bài 8 - VDC]. Trung hòa 20 mL $H_2SO_4$ vừa đủ bằng 40 mL $NaOH$ 0,5 M. Nồng độ mol $H_2SO_4$ là bao nhiêu (M)?",
+                "correctAnswer": "0.5",
+                "rationale": "n$NaOH$ = 0,04 × 0,5 = 0,02 mol; n$H_2SO_4$ = 0,01 mol; CM = 0,01/0,02 = 0,5 M."
+        },
+        {
+                "type": "mcq",
+                "level": "NB",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Câu 1 [Bài 9 - NB]. Cấu hình electron lớp ngoài cùng của nguyên tử nitrogen (Z = 7) là:",
+                "options": [
+                        {
+                                "text": "A. 2s2 2p3",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "B. 2s2 2p4",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "C. 3s2 3p3",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. 2s2 2p5",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "Nitrogen có cấu hình electron 1s2 2s2 2p3.",
+                "correctAnswer": "CaSO4·2H2O|CaSO4"
+        },
+        {
+                "type": "mcq",
+                "level": "NB",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Câu 2 [Bài 9 - NB]. Phân tử ammonia ($NH_3$) có dạng hình học nào?",
+                "options": [
+                        {
+                                "text": "A. Đường thẳng",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. Chóp tam giác",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "C. Tứ diện đều",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. Chữ T",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "$NH_3$ có dạng hình chóp tam giác do nguyên tử N có một cặp electron chưa liên kết.",
+                "correctAnswer": "+5"
+        },
+        {
+                "type": "mcq",
+                "level": "NB",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Câu 3 [Bài 9 - NB]. Ở nhiệt độ thường, đơn chất nào khá trơ do phân tử có liên kết ba bền vững?",
+                "options": [
+                        {
+                                "text": "A. $O_2$",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. Cl2",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "C. $N_2$",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "D. S",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "Phân tử nitrogen có liên kết ba $N\\equiv N$ rất bền."
+        },
+        {
+                "type": "mcq",
+                "level": "NB",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Câu 4 [Bài 9 - NB]. Dung dịch chất nào làm quỳ tím chuyển sang màu xanh?",
+                "options": [
+                        {
+                                "text": "A. $HNO_3$",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. $H_2SO_4$",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "C. $NH_3$",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "D. $SO_2$",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "Ammonia tan trong nước tạo dung dịch có tính base yếu."
+        },
+        {
+                "type": "mcq",
+                "level": "NB",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Câu 5 [Bài 9 - NB]. Để nhận biết ion ammonium ($NH_4^+$) trong dung dịch, đun nóng muối với chất nào?",
+                "options": [
+                        {
+                                "text": "A. Dung dịch kiềm ($OH^-$)",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "B. Dung dịch acid ($H^+$)",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "C. $BaCl_2$",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. $AgNO_3$",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "Ion $NH_4^+$ tác dụng với $OH^-$ khi đun nóng giải phóng $NH_3$."
+        },
+        {
+                "type": "mcq",
+                "level": "NB",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Câu 6 [Bài 9 - NB]. Các khí nào là tác nhân chính gây mưa acid và sương mù quang hóa?",
+                "options": [
+                        {
+                                "text": "A. $N_2$ và $O_2$",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. $SO_2$ và $NO_x$",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "C. $CH_4$ và $CO_2$",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. He và Ar",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "$SO_2$ và các oxide nitrogen ($NO_x$) là các tác nhân gây ô nhiễm không khí."
+        },
+        {
+                "type": "mcq",
+                "level": "NB",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Câu 7 [Bài 9 - NB]. Phú dưỡng ở ao hồ chủ yếu do dư thừa hai nguyên tố dinh dưỡng nào?",
+                "options": [
+                        {
+                                "text": "A. Carbon và oxygen",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. Calcium và magnesium",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "C. Nitrogen và phosphorus",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "D. Sodium và potassium",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "Dư thừa hợp chất nitrogen và phosphorus thúc đẩy phú dưỡng."
+        },
+        {
+                "type": "mcq",
+                "level": "NB",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Câu 8 [Bài 9 - NB]. Số oxi hóa cao nhất của sulfur trong các hợp chất là:",
+                "options": [
+                        {
+                                "text": "A. +2",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. +4",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "C. +6",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "D. −2",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "Sulfur có số oxi hóa cao nhất là +6."
+        },
+        {
+                "type": "mcq",
+                "level": "TH",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Câu 9 [Bài 9 - TH]. Trong phản ứng 4$NH_3$ + 5$O_2$ → 4NO + 6$H_2O$ (xúc tác Pt, 800°C), $NH_3$ đóng vai trò:",
+                "options": [
+                        {
+                                "text": "A. Chất oxi hóa",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. Chất khử",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "C. Môi trường",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. Chất xúc tác",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "N trong $NH_3$ tăng số oxi hóa từ −3 lên +2 nên $NH_3$ là chất khử."
+        },
+        {
+                "type": "mcq",
+                "level": "TH",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Câu 10 [Bài 9 - TH]. Nhỏ $BaCl_2$ vào dung dịch $H_2SO_4$ loãng quan sát được:",
+                "options": [
+                        {
+                                "text": "A. Kết tủa trắng",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "B. Kết tủa đen",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "C. Khí mùi hắc",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. Không hiện tượng",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "Ba2+ và $SO_4^{2-}$ tạo kết tủa trắng $BaSO_4$."
+        },
+        {
+                "type": "mcq",
+                "level": "TH",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Câu 11 [Bài 9 - TH]. Trong phản ứng $SO_2$ + 2$H_2S$ → 3S + 2$H_2O$, $SO_2$ thể hiện tính chất gì?",
+                "options": [
+                        {
+                                "text": "A. Tính khử",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. Tính oxi hóa",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "C. Tính acid",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. Tính base",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "S trong $SO_2$ giảm số oxi hóa từ +4 xuống 0, nên $SO_2$ là chất oxi hóa."
+        },
+        {
+                "type": "mcq",
+                "level": "TH",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Câu 12 [Bài 9 - TH]. Nitric acid thể hiện hai tính chất hóa học nổi bật nào?",
+                "options": [
+                        {
+                                "text": "A. Acid yếu và tính khử mạnh",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. Acid mạnh và tính oxi hóa mạnh",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "C. Base mạnh và háo nước",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. Acid yếu và oxi hóa yếu",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "$HNO_3$ là acid mạnh và có tính oxi hóa mạnh."
+        },
+        {
+                "type": "mcq",
+                "level": "TH",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Câu 13 [Bài 9 - TH]. Nhiệt phân muối ammonium nào sinh ra khí $N_2O$?",
+                "options": [
+                        {
+                                "text": "A. $NH_4Cl$",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. NH4H$CO$3",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "C. $NH_4NO_3$",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "D. $(NH_4)_2SO_4$",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "$NH_4NO_3$ nhiệt phân tạo $N_2O$ và $H_2O$."
+        },
+        {
+                "type": "mcq",
+                "level": "TH",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Câu 14 [Bài 9 - TH]. Đun nóng $NH_4Cl$ với dung dịch $NaOH$ dư thu được khí X làm xanh quỳ tím ẩm. X là:",
+                "options": [
+                        {
+                                "text": "A. $NO_2$",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. $NH_3$",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "C. $N_2$",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. $SO_2$",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "$NH_4Cl$ + $NaOH$ → $NH_3$↑ + NaCl + $H_2O$; ammonia làm xanh quỳ tím ẩm."
+        },
+        {
+                "type": "mcq",
+                "level": "VD",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Câu 15 [Bài 9 - VD]. Kim loại nào phản ứng với $H_2SO_4$ đặc nóng nhưng không phản ứng với $H_2SO_4$ loãng?",
+                "options": [
+                        {
+                                "text": "A. Fe",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. Al",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "C. Zn",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. Cu",
+                                "isCorrect": true
+                        }
+                ],
+                "rationale": "Cu không phản ứng với $H_2SO_4$ loãng nhưng bị oxi hóa bởi $H_2SO_4$ đặc nóng."
+        },
+        {
+                "type": "mcq",
+                "level": "VD",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Câu 16 [Bài 9 - VD]. Để phân biệt $NH_4Cl$, $(NH_4)_2SO_4$, NaCl và $Na_2SO_4$ chỉ dùng một thuốc thử nào?",
+                "options": [
+                        {
+                                "text": "A. $Ba(OH)_2$",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "B. $NaOH$",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "C. $BaCl_2$",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. Quỳ tím",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "$Ba(OH)_2$: muối ammonium giải phóng $NH_3$ khi đun nóng; muối sulfate tạo kết tủa $BaSO_4$."
+        },
+        {
+                "type": "mcq",
+                "level": "VD",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Câu 17 [Bài 9 - VD]. Hấp thụ hoàn toàn 0,1 mol $NO_2$ vào nước có $O_2$ dư. Số mol $HNO_3$ tạo thành là:",
+                "options": [
+                        {
+                                "text": "A. 0,05 mol",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. 0,10 mol",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "C. 0,20 mol",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. 0,15 mol",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "Phản ứng 4$NO_2$ + $O_2$ + 2$H_2O$ → 4$HNO_3$, nên n$HNO_3$ = n$NO_2$ = 0,1 mol."
+        },
+        {
+                "type": "mcq",
+                "level": "VD",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Câu 18 [Bài 9 - VD]. Sục 2,479 L $SO_2$ (đkc) vào 200 mL $NaOH$ 1 M. Dung dịch thu được chứa muối nào?",
+                "options": [
+                        {
+                                "text": "A. $NaHSO_3$",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "B. $Na_2SO_3$",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "C. Cả $NaHSO_3$ và $Na_2SO_3$",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. $Na_2SO_4$",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "n$SO_2$ = 0,1 mol; n$NaOH$ = 0,2 mol, tỉ lệ 2:1 nên tạo $Na_2SO_3$."
+        },
+        {
+                "type": "mcq",
+                "level": "VDC",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Câu 19 [Bài 9 - VDC]. Hòa tan m gam Fe trong $HNO_3$ loãng dư, thu 2,479 L NO (sản phẩm khử duy nhất, đkc). m bằng:",
+                "options": [
+                        {
+                                "text": "A. 5,6 g",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "B. 2,8 g",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "C. 8,4 g",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. 11,2 g",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "nNO = 0,1 mol; theo Fe + 4$HNO_3$ → Fe(NO3)3 + NO + 2$H_2O$, nFe = 0,1 mol; m = 5,6 g."
+        },
+        {
+                "type": "mcq",
+                "level": "VDC",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Câu 20 [Bài 9 - VDC]. Nhiệt phân hoàn toàn 18,8 g $Cu(NO_3)_2$; hấp thụ hỗn hợp khí vào nước dư. Khối lượng $HNO_3$ thu được là:",
+                "options": [
+                        {
+                                "text": "A. 12,6 g",
+                                "isCorrect": true
+                        },
+                        {
+                                "text": "B. 6,3 g",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "C. 25,2 g",
+                                "isCorrect": false
+                        },
+                        {
+                                "text": "D. 18,9 g",
+                                "isCorrect": false
+                        }
+                ],
+                "rationale": "n$Cu(NO_3)_2$ = 18,8/188 = 0,1 mol; tạo 0,2 mol $NO_2$ và 0,05 mol $O_2$. 4$NO_2$ + $O_2$ + 2$H_2O$ → 4$HNO_3$; n$HNO_3$ = 0,2 mol, m = 12,6 g."
+        },
+        {
+                "type": "tf",
+                "level": "NB",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Xét tính chất của đơn chất nitrogen và hợp chất ammonia. — ý a) Phân tử nitrogen có liên kết ba $N\\equiv N$ bền vững nên ở nhiệt độ thường khá trơ hóa học.",
+                "correctBool": true,
+                "rationale": "Đúng: liên kết ba $N\\equiv N$ bền."
+        },
+        {
+                "type": "tf",
+                "level": "NB",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Xét tính chất của đơn chất nitrogen và hợp chất ammonia. — ý b) Khí ammonia tan ít trong nước và có tính acid yếu.",
+                "correctBool": false,
+                "rationale": "Sai: ammonia tan rất nhiều trong nước và có tính base yếu."
+        },
+        {
+                "type": "tf",
+                "level": "NB",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Xét tính chất của đơn chất nitrogen và hợp chất ammonia. — ý c) Phân tử $NH_3$ có dạng hình chóp tam giác và còn một cặp electron chưa liên kết.",
+                "correctBool": true,
+                "rationale": "Đúng: $NH_3$ có dạng chóp tam giác và một cặp electron tự do."
+        },
+        {
+                "type": "tf",
+                "level": "NB",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Xét tính chất của đơn chất nitrogen và hợp chất ammonia. — ý d) Trong công nghiệp, ammonia được tổng hợp từ $N_2$ và $H_2$ theo quá trình Haber-Bosch.",
+                "correctBool": true,
+                "rationale": "Đúng: quy trình Haber-Bosch tổng hợp $NH_3$ từ $N_2$ và $H_2$."
+        },
+        {
+                "type": "tf",
+                "level": "NB",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Xét tính chất của đơn chất sulfur và sulfur dioxide. — ý a) Sulfur ở ô số 16, nhóm VIA, có cấu hình electron lớp ngoài cùng 3s2 3p4.",
+                "correctBool": true,
+                "rationale": "Đúng: cấu hình lớp ngoài cùng là 3s2 3p4."
+        },
+        {
+                "type": "tf",
+                "level": "NB",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Xét tính chất của đơn chất sulfur và sulfur dioxide. — ý b) Đơn chất sulfur chỉ thể hiện tính oxi hóa, không thể hiện tính khử.",
+                "correctBool": false,
+                "rationale": "Sai: sulfur có thể thể hiện cả tính oxi hóa và tính khử."
+        },
+        {
+                "type": "tf",
+                "level": "NB",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Xét tính chất của đơn chất sulfur và sulfur dioxide. — ý c) $SO_2$ phát thải khi đốt nhiên liệu chứa sulfur là tác nhân gây mưa acid.",
+                "correctBool": true,
+                "rationale": "Đúng: $SO_2$ góp phần gây mưa acid."
+        },
+        {
+                "type": "tf",
+                "level": "NB",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Xét tính chất của đơn chất sulfur và sulfur dioxide. — ý d) $SO_2$ vừa có tính oxi hóa vừa có tính khử.",
+                "correctBool": true,
+                "rationale": "Đúng: sulfur trong $SO_2$ có số oxi hóa trung gian +4."
+        },
+        {
+                "type": "tf",
+                "level": "TH",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Xét phản ứng oxi hóa – khử của nitric acid và sulfuric acid đặc. — ý a) $HNO_3$ oxi hóa được hầu hết kim loại (trừ Au, Pt), đưa kim loại lên số oxi hóa cao.",
+                "correctBool": true,
+                "rationale": "Đúng theo nội dung phiếu bài tập."
+        },
+        {
+                "type": "tf",
+                "level": "TH",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Xét phản ứng oxi hóa – khử của nitric acid và sulfuric acid đặc. — ý b) $H_2SO_4$ đặc nóng tác dụng với Cu sinh ra khí $H_2$.",
+                "correctBool": false,
+                "rationale": "Sai: phản ứng với Cu tạo $SO_2$, không tạo $H_2$."
+        },
+        {
+                "type": "tf",
+                "level": "TH",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Xét phản ứng oxi hóa – khử của nitric acid và sulfuric acid đặc. — ý c) Hỗn hợp nước cường toan gồm $HNO_3$ đặc và HCl đặc có thể hòa tan vàng (Au).",
+                "correctBool": true,
+                "rationale": "Đúng: nước cường toan có khả năng hòa tan vàng."
+        },
+        {
+                "type": "tf",
+                "level": "TH",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Xét phản ứng oxi hóa – khử của nitric acid và sulfuric acid đặc. — ý d) $H_2SO_4$ đặc tác dụng với saccharose làm đường hóa đen và dâng cao.",
+                "correctBool": true,
+                "rationale": "Đúng: $H_2SO_4$ đặc có tính háo nước làm đường hóa đen."
+        },
+        {
+                "type": "tf",
+                "level": "VD",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Xét tác động môi trường và ứng dụng thực tiễn. — ý a) Dư thừa nitrate ($NO_3^-$) và phosphate ($PO_4^{3-}$) trong ao hồ gây phú dưỡng.",
+                "correctBool": true,
+                "rationale": "Đúng: dư thừa nitrate và phosphate gây phú dưỡng."
+        },
+        {
+                "type": "tf",
+                "level": "VD",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Xét tác động môi trường và ứng dụng thực tiễn. — ý b) Phân bón $NH_4NO_3$ vừa cung cấp đạm vừa có nguy cơ cháy nổ nếu bảo quản sai quy cách.",
+                "correctBool": true,
+                "rationale": "Đúng theo nội dung phiếu bài tập."
+        },
+        {
+                "type": "tf",
+                "level": "VD",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Xét tác động môi trường và ứng dụng thực tiễn. — ý c) $SO_2$ được dùng tẩy trắng bột giấy và chống nấm mốc cho nông sản.",
+                "correctBool": true,
+                "rationale": "Đúng: $SO_2$ có các ứng dụng nêu trên."
+        },
+        {
+                "type": "tf",
+                "level": "VD",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Xét tác động môi trường và ứng dụng thực tiễn. — ý d) Đốt than đá không phát thải $SO_2$ vào khí quyển.",
+                "correctBool": false,
+                "rationale": "Sai: than đá có thể chứa sulfur; đốt cháy có thể phát thải $SO_2$."
+        },
+        {
+                "type": "tf",
+                "level": "VDC",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Xét nhận biết hóa học và bài tập tổng hợp chương 2. — ý a) Có thể phân biệt $NH_4Cl$ và $(NH_4)_2SO_4$ bằng $Ba(OH)_2$; nhận biết qua $NH_3$ và kết tủa trắng $BaSO_4$.",
+                "correctBool": true,
+                "rationale": "Đúng theo cách nhận biết được nêu trong đáp án."
+        },
+        {
+                "type": "tf",
+                "level": "VDC",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Xét nhận biết hóa học và bài tập tổng hợp chương 2. — ý b) Khi đun nóng $NH_4Cl$ bị phân hủy tạo hai khí $NH_3$ và HCl.",
+                "correctBool": true,
+                "rationale": "Đúng: $NH_4Cl$ ⇌ $NH_3$ + HCl khi đun nóng."
+        },
+        {
+                "type": "tf",
+                "level": "VDC",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Xét nhận biết hóa học và bài tập tổng hợp chương 2. — ý c) Hòa tan 0,1 mol Fe trong $HNO_3$ đặc nóng dư thu 4,958 L $NO_2$ (đkc).",
+                "correctBool": false,
+                "rationale": "Sai: theo đáp án, n$NO_2$ = 3 × nFe = 0,3 mol, V = 7,437 L."
+        },
+        {
+                "type": "tf",
+                "level": "VDC",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Xét nhận biết hóa học và bài tập tổng hợp chương 2. — ý d) Cho 0,1 mol $SO_2$ vào dung dịch chứa 0,15 mol $NaOH$ thu duy nhất $Na_2SO_3$.",
+                "correctBool": false,
+                "rationale": "Sai: tỉ lệ tạo hỗn hợp $NaHSO_3$ và $Na_2SO_3$."
+        },
+        {
+                "type": "sa",
+                "level": "NB",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Câu 1 [Bài 9 - NB]. Kể tên khí có mùi khai, nhẹ hơn không khí, tan rất nhiều trong nước tạo dung dịch có tính base yếu.",
+                "correctAnswer": "NH3|ammonia",
+                "rationale": "Khí ammonia ($NH_3$) có mùi khai, nhẹ hơn không khí và tan nhiều trong nước."
+        },
+        {
+                "type": "sa",
+                "level": "NB",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Câu 2 [Bài 9 - NB]. Viết công thức hóa học của muối calcium sulfate trong quặng thạch cao.",
+                "correctAnswer": "CaSO4·2H2O",
+                "rationale": "Thạch cao tự nhiên được nêu là $CaSO_4\\cdot 2H_2O$; phiếu cũng chấp nhận $CaSO_4$."
+        },
+        {
+                "type": "sa",
+                "level": "TH",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Câu 3 [Bài 9 - TH]. Xác định số oxi hóa của nitrogen trong phân tử $HNO_3$.",
+                "correctAnswer": "+5",
+                "rationale": "Gọi số oxi hóa của N là x: x + 1 + 3(−2) = 0 ⇒ x = +5."
+        },
+        {
+                "type": "sa",
+                "level": "VD",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Câu 4 [Bài 9 - VD]. Tính thể tích NO (L, ở 25°C và 1 bar) thu được khi hòa tan hoàn toàn 2,8 g Fe trong $HNO_3$ loãng dư.",
+                "correctAnswer": "1.2395",
+                "rationale": "nFe = 2,8/56 = 0,05 mol; theo phương trình nNO = nFe = 0,05 mol; V = 0,05 × 24,79 = 1,2395 L."
+        },
+        {
+                "type": "sa",
+                "level": "VDC",
+                "lesson": "Bài 9: Ôn tập chương 2 (Nitrogen – Sulfur)",
+                "question": "Câu 5 [Bài 9 - VDC]. Tính thể tích (mL) dung dịch $Ba(OH)_2$ 0,5 M cần để kết tủa hoàn toàn sulfate trong 100 mL $Al_2(SO_4)_3$ 0,2 M.",
+                "correctAnswer": "120",
+                "rationale": "n$Al_2(SO_4)_3$ = 0,1 × 0,2 = 0,02 mol; n$SO_4^{2-}$ = 0,06 mol = n$Ba(OH)_2$; V = 0,06/0,5 = 0,12 L = 120 mL."
+        }
+];
+
+        let questions = [];
+        let participants = [];
+        let gameMode = 'group';
+        let currentIndex = 0;
+        let currentQuestionIndex = 0;
+
+        function setGameMode(mode) {
+            gameMode = mode;
+            const btnGroup = document.getElementById('btn-mode-group');
+            const btnSingle = document.getElementById('btn-mode-single');
+            const subtitle = document.getElementById('setup-subtitle');
+            const container = document.getElementById('participant-inputs');
+            const addTeamBox = document.getElementById('add-team-box');
+
+            if (mode === 'group') {
+                btnGroup.className = "px-6 py-2.5 rounded-xl font-bold text-sm bg-blue-600 text-white shadow-lg transition flex items-center space-x-2";
+                btnSingle.className = "px-6 py-2.5 rounded-xl font-bold text-sm bg-slate-700 text-slate-300 shadow-lg transition flex items-center space-x-2";
+                subtitle.innerText = "Thiết lập thông tin các đội chơi";
+                addTeamBox.style.display = 'flex';
+                container.innerHTML = `
+                    <div class="flex items-center space-x-2">
+                        <span class="bg-blue-600 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shrink-0">1</span>
+                        <input type="text" value="Đội 1" class="participant-input w-full bg-slate-900 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500 font-semibold text-sm" placeholder="Nhập tên...">
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="bg-purple-600 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shrink-0">2</span>
+                        <input type="text" value="Đội 2" class="participant-input w-full bg-slate-900 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-purple-500 font-semibold text-sm" placeholder="Nhập tên...">
+                    </div>
+                `;
+            } else {
+                btnSingle.className = "px-6 py-2.5 rounded-xl font-bold text-sm bg-teal-600 text-white shadow-lg transition flex items-center space-x-2";
+                btnGroup.className = "px-6 py-2.5 rounded-xl font-bold text-sm bg-slate-700 text-slate-300 shadow-lg transition flex items-center space-x-2";
+                subtitle.innerText = "Nhập họ và tên học sinh làm bài";
+                addTeamBox.style.display = 'none';
+                container.innerHTML = `
+                    <div class="flex items-center space-x-2">
+                        <span class="bg-teal-600 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" value="Nguyễn Văn A" class="participant-input w-full bg-slate-900 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500 font-semibold text-sm" placeholder="Họ và tên của bạn...">
+                    </div>
+                `;
+            }
+        }
+
+        function addParticipantInput() {
+            const container = document.getElementById('participant-inputs');
+            const count = container.children.length + 1;
+            const div = document.createElement('div');
+            div.className = 'flex items-center space-x-2';
+            const colorClass = count % 2 === 0 ? 'bg-purple-600' : 'bg-blue-600';
+            div.innerHTML = `
+                <span class="${colorClass} w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shrink-0">${count}</span>
+                <input type="text" value="Đội ${count}" class="participant-input w-full bg-slate-900 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500 font-semibold text-sm" placeholder="Nhập tên...">
+                <button onclick="this.parentElement.remove()" class="text-red-400 hover:text-red-300 px-2"><i class="fa-solid fa-trash"></i></button>
+            `;
+            container.appendChild(div);
+        }
+
+        function startGame() {
+            getAudioContext();
+
+            const inputs = document.querySelectorAll('.participant-input');
+            participants = [];
+            inputs.forEach((input, index) => {
+                const name = input.value.trim() || (gameMode === 'group' ? `Đội ${index + 1}` : `Học sinh`);
+                participants.push({ name: name, score: 0, correctCount: 0 });
+            });
+
+            if (participants.length === 0) {
+                alert("Vui lòng nhập tên người làm bài!");
+                return;
+            }
+
+            // Xáo trộn ngẫu nhiên toàn bộ 90 câu hỏi
+            questions = [...originalQuestions].sort(() => Math.random() - 0.5);
+
+            document.getElementById('setup-screen').classList.add('hidden');
+            document.getElementById('game-screen').classList.remove('hidden');
+            document.getElementById('total-q-num').innerText = questions.length;
+            
+            if (gameMode === 'single') {
+                document.getElementById('turn-label').innerText = 'Học sinh:';
+            } else {
+                document.getElementById('turn-label').innerText = 'Lượt của:';
+            }
+
+            currentIndex = 0;
+            currentQuestionIndex = 0;
+            loadQuestion();
+        }
+
+        function updateScoreboardMini() {
+            const container = document.getElementById('scoreboard-mini');
+            container.innerHTML = '';
+            
+            if (gameMode === 'single') {
+                container.style.display = 'none';
+                document.getElementById('current-participant-badge').innerText = participants[0].name;
+            } else {
+                container.style.display = 'grid';
+                participants.forEach((p, idx) => {
+                    const isCurrent = idx === currentIndex;
+                    const div = document.createElement('div');
+                    div.className = `p-2 rounded-lg border ${isCurrent ? 'border-teal-400 bg-teal-950/40 pulse-glow' : 'border-slate-700 bg-slate-900/40'}`;
+                    div.innerHTML = `
+                        <div class="text-xs text-slate-300 truncate font-semibold">${p.name}</div>
+                        <div class="text-lg font-extrabold text-teal-300">${p.score} đ</div>
+                    `;
+                    container.appendChild(div);
+                });
+                document.getElementById('current-participant-badge').innerText = participants[currentIndex].name;
+            }
+        }
+
+        function loadQuestion() {
+            const q = questions[currentQuestionIndex];
+            document.getElementById('current-q-num').innerText = currentQuestionIndex + 1;
+            const questionTextElement = document.getElementById('question-text');
+            questionTextElement.innerHTML = q.question;
+            typesetMath(questionTextElement);
+
+            // Hiển thị badge phân loại
+            const typeText = q.type === 'mcq' ? 'Trắc nghiệm 4 lựa chọn' : q.type === 'tf' ? 'Câu hỏi Đúng / Sai' : 'Câu hỏi Trả lời ngắn';
+            document.getElementById('question-badge').innerText = `${q.lesson} • Cấp độ: ${q.level} • ${typeText}`;
+
+            updateScoreboardMini();
+
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            if (q.type === 'mcq') {
+                // Trắc nghiệm 4 lựa chọn
+                const gridDiv = document.createElement('div');
+                gridDiv.className = 'grid grid-cols-1 md:grid-cols-2 gap-4';
+
+                let currentOptions = [...q.options].sort(() => Math.random() - 0.5);
+                const letters = ['A', 'B', 'C', 'D'];
+
+                currentOptions.forEach((opt, idx) => {
+                    const cleanText = opt.text.replace(/^[A-D]\.\s*/, '');
+                    const btn = document.createElement('button');
+                    btn.className = 'bg-slate-900/90 hover:bg-slate-700 border border-slate-700 hover:border-blue-500 p-4 rounded-xl text-left transition flex items-start space-x-3 group shadow';
+                    
+                    btn.innerHTML = `
+                        <span class="bg-slate-800 text-teal-400 font-bold px-2.5 py-1 rounded-lg text-sm shrink-0">${letters[idx]}</span>
+                        <span class="text-slate-100 font-medium text-sm md:text-base my-auto">${cleanText}</span>
+                    `;
+
+                    btn.onclick = () => selectAnswer(opt.isCorrect, q.rationale);
+                    gridDiv.appendChild(btn);
+                });
+                optionsContainer.appendChild(gridDiv);
+                typesetMath(optionsContainer);
+            } else if (q.type === 'tf') {
+                // Câu hỏi Đúng / Sai
+                const gridDiv = document.createElement('div');
+                gridDiv.className = 'grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg mx-auto pt-2';
+
+                const btnTrue = document.createElement('button');
+                btnTrue.className = 'bg-emerald-900/80 hover:bg-emerald-700 border border-emerald-500 p-5 rounded-2xl text-center font-bold text-xl transition shadow-lg flex items-center justify-center space-x-3';
+                btnTrue.innerHTML = `<i class="fa-solid fa-check text-2xl text-emerald-400"></i> <span>ĐÚNG</span>`;
+                btnTrue.onclick = () => selectAnswer(q.correctBool === true, q.rationale);
+
+                const btnFalse = document.createElement('button');
+                btnFalse.className = 'bg-red-900/80 hover:bg-red-700 border border-red-500 p-5 rounded-2xl text-center font-bold text-xl transition shadow-lg flex items-center justify-center space-x-3';
+                btnFalse.innerHTML = `<i class="fa-solid fa-xmark text-2xl text-red-400"></i> <span>SAI</span>`;
+                btnFalse.onclick = () => selectAnswer(q.correctBool === false, q.rationale);
+
+                gridDiv.appendChild(btnTrue);
+                gridDiv.appendChild(btnFalse);
+                optionsContainer.appendChild(gridDiv);
+            } else if (q.type === 'sa') {
+                // Câu hỏi Trả lời ngắn
+                const boxDiv = document.createElement('div');
+                boxDiv.className = 'max-w-md mx-auto space-y-4 pt-2 text-center';
+                boxDiv.innerHTML = `
+                    <div class="text-xs text-slate-400">Nhập đáp án (chữ số, từ khóa hoặc số thập phân) rồi nhấn Xác nhận:</div>
+                    <div class="flex space-x-2">
+                        <input id="sa-input" type="text" class="w-full bg-slate-900 border border-teal-500 rounded-xl px-4 py-3 text-white text-center font-bold text-lg focus:outline-none focus:ring-2 focus:ring-teal-400" placeholder="Nhập câu trả lời...">
+                        <button id="sa-submit-btn" class="bg-teal-600 hover:bg-teal-500 text-white font-bold px-6 py-3 rounded-xl shadow transition">Gửi</button>
+                    </div>
+                `;
+                optionsContainer.appendChild(boxDiv);
+                typesetMath(optionsContainer);
+
+                const inputEl = document.getElementById('sa-input');
+                const submitBtn = document.getElementById('sa-submit-btn');
+
+                const handleSaSubmit = () => {
+                    const userAns = inputEl.value.trim().toLowerCase().replace(/\s+/g, '').replace(',', '.');
+                    const acceptedAnswers = q.correctAnswer.split('|').map(answer => answer.trim().toLowerCase().replace(/\s+/g, '').replace(',', '.'));
+                    const isCorrect = acceptedAnswers.includes(userAns);
+                    selectAnswer(isCorrect, `${q.rationale} (Đáp án chuẩn: <b>${q.correctAnswer}</b>)`);
+                };
+
+                submitBtn.onclick = handleSaSubmit;
+                inputEl.addEventListener('keyup', (e) => {
+                    if (e.key === 'Enter') handleSaSubmit();
+                });
+                setTimeout(() => inputEl.focus(), 100);
+            }
+        }
+
+        function selectAnswer(isCorrect, rationaleText) {
+            document.getElementById('game-screen').classList.add('hidden');
+            const feedbackScreen = document.getElementById('feedback-screen');
+            feedbackScreen.classList.remove('hidden');
+
+            const title = document.getElementById('feedback-title');
+            const icon = document.getElementById('feedback-icon');
+            const rationale = document.getElementById('feedback-rationale');
+
+            if (isCorrect) {
+                playCorrectSound(); // Phát âm thanh chọn ĐÚNG
+                participants[currentIndex].score += 10;
+                participants[currentIndex].correctCount++;
+                icon.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-400"></i>';
+                title.innerText = gameMode === 'single' ? "Chính Xác! (+10 điểm)" : `${participants[currentIndex].name} Trả Lời Chính Xác! (+10 điểm)`;
+                title.className = "text-2xl font-bold text-emerald-400";
+            } else {
+                playIncorrectSound(); // Phát âm thanh chọn SAI
+                if (gameMode === 'group') {
+                    participants[currentIndex].score = Math.max(0, participants[currentIndex].score - 5);
+                }
+                icon.innerHTML = '<i class="fa-solid fa-circle-xmark text-red-400"></i>';
+                title.innerText = gameMode === 'single' ? "Chưa Chính Xác!" : `${participants[currentIndex].name} Chưa Chính Xác! (-5 điểm)`;
+                title.className = "text-2xl font-bold text-red-400";
+            }
+
+            rationale.innerHTML = rationaleText;
+            typesetMath(rationale);
+        }
+
+        function nextQuestion() {
+            if (gameMode === 'group') {
+                currentIndex = (currentIndex + 1) % participants.length;
+            }
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < questions.length) {
+                document.getElementById('feedback-screen').classList.add('hidden');
+                document.getElementById('game-screen').classList.remove('hidden');
+                loadQuestion();
+            } else {
+                endGame(); // Nộp bài và hiển thị kết quả
+            }
+        }
+
+        function endGame() {
+            document.getElementById('feedback-screen').classList.add('hidden');
+            document.getElementById('end-screen').classList.remove('hidden');
+
+            const container = document.getElementById('final-scoreboard');
+            container.innerHTML = '';
+
+            if (gameMode === 'single') {
+                const student = participants[0];
+                document.getElementById('end-subtitle').innerText = `Học sinh: ${student.name}`;
+                
+                // Quy đổi điểm sang hệ 10 trên tổng số 90 câu
+                const score10 = ((student.correctCount / questions.length) * 10).toFixed(1);
+
+                const div = document.createElement('div');
+                div.className = 'bg-slate-900 border border-teal-500 p-6 rounded-2xl space-y-3 text-center';
+                div.innerHTML = `
+                    <div class="text-slate-400 text-sm">Tổng số câu đúng: <b class="text-white">${student.correctCount} / ${questions.length}</b></div>
+                    <div class="text-4xl font-extrabold text-teal-300">${score10} <span class="text-xl font-bold text-slate-300">/ 10 Điểm</span></div>
+                    <div class="text-xs text-slate-400 pt-2">${Number(score10) >= 8 ? '🌟 Xuất sắc! Bạn nắm rất vững kiến thức Bài 8 và Bài 9.' : Number(score10) >= 5 ? '👍 Khá tốt! Hãy ôn luyện thêm các câu hỏi vận dụng chuyên sâu nhé.' : '📖 Cần cố gắng ôn lại lý thuyết Bài 8 và Bài 9 nhé!'}</div>
+                `;
+                container.appendChild(div);
+            } else {
+                document.getElementById('end-subtitle').innerText = "Trò chơi đã kết thúc! Tổng kết điểm số các đội chơi.";
+                const sortedList = [...participants].sort((a, b) => b.score - a.score);
+                sortedList.forEach((p, idx) => {
+                    const div = document.createElement('div');
+                    div.className = `flex justify-between items-center p-4 rounded-xl border ${idx === 0 ? 'bg-amber-500/20 border-amber-400 text-amber-300 font-bold' : 'bg-slate-900 border-slate-700 text-white'}`;
+                    div.innerHTML = `
+                        <div class="flex items-center space-x-3">
+                            <span class="w-8 h-8 rounded-full flex items-center justify-center font-bold ${idx === 0 ? 'bg-amber-500 text-slate-950' : 'bg-slate-800 text-slate-300'}">${idx + 1}</span>
+                            <span>${p.name}</span>
+                        </div>
+                        <span class="text-xl font-extrabold">${p.score} điểm</span>
+                    `;
+                    container.appendChild(div);
+                });
+            }
+
+            confetti({
+                particleCount: 160,
+                spread: 85,
+                origin: { y: 0.6 }
+            });
+        }
+
+        function restartGame() {
+            document.getElementById('end-screen').classList.add('hidden');
+            document.getElementById('setup-screen').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
